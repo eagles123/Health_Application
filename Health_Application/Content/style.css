@@ -77,15 +77,16 @@ textarea {
 
 .form {
     display: block;
-    margin-top: 0em;
+    margin-top: 1em;
 }
 
 .form-horizontal {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-style:inherit;
+    font-size: 20px;
     line-height: 1.42857143;
     color: #333;
-    background-color: #fff;
+
 }
 
 .welcome hr {
@@ -93,12 +94,16 @@ textarea {
     width:65%;
 }
 
+#left {
+
+}
+
 .social a{
     font-size:4.5em;
     padding: 3rem;
 }
 .fa-facebook{
-    color:darkblue;
+    color:darkslateblue;
 }
 
 .fa-twitter{
@@ -109,14 +114,17 @@ textarea {
     color:red;
 }
 
-.fa-youtue{
+.fa-youtube {
     color:red;
 }
 .fa-facebook:hover,
 .fa-google-plus-g:hover,
 .fa-twitter:hover,
-.fa-youtue:hover{
+.fa-youtube:hover{
     color:lightslategrey;
+}
+.footer{
+    position:center;
 }
 
 /*---Media Queries --*/

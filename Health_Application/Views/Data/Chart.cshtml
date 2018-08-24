@@ -1,0 +1,70 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js></script>
+
+<div class="container-fluid">
+    <div class="row">
+        @*<div class="col-md-4 offset-1">
+            <div class="ct-chart ct-golden-section" id="chart1"></div>
+        </div>*@
+        <div class="col-md-4 offset-1">
+                <canvas id="pieChart"></canvas>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //var data = {
+    //    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    //    series: [
+    //        [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+    //        [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+    //    ]
+    //};
+
+    //var options = {
+    //    seriesBarDistance: 10
+    //};
+
+    //var responsiveOptions = [
+    //    ['screen and (max-width: 640px)', {
+    //        seriesBarDistance: 5,
+    //        axisX: {
+    //            labelInterpolationFnc: function (value) {
+    //                return value[0];
+    //            }
+    //        }
+    //    }]
+    //];
+    
+    //new Chartist.Bar('#chart2', data, options, responsiveOptions);
+    var ctx = document.getElementById("pieChart");
+    data = {
+        datasets: [{
+            data: [@ViewBag.protein, @ViewBag.carbon, @ViewBag.fat]
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+            'Protein',
+            'Carbonhydrate',
+            'Fate'
+        ]
+    };
+
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)']
+
+    });
+
+</script>
+

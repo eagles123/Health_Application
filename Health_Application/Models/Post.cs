@@ -15,6 +15,8 @@ namespace Health_Application.Models
         [Required]
         public String Title { get; set; }
 
+        public DateTime Time { get; set; }
+
         public String Body { get; set; }
 
         public IList<Response> Response { get; set; }

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Health_Application", "Health_Application\Health_Application.csproj", "{BF81E39A-E081-49FC-AFE3-5B9932BC00C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT_5032 Application", "..\..\..\Desktop\Monash\Internet App Dev\Assignment\FIT_5032 Application\FIT_5032 Application\FIT_5032 Application.csproj", "{AF9A87C1-F79B-49A4-8DDF-48EDEF221BC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +17,15 @@ Global
 		{BF81E39A-E081-49FC-AFE3-5B9932BC00C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF81E39A-E081-49FC-AFE3-5B9932BC00C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF81E39A-E081-49FC-AFE3-5B9932BC00C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF9A87C1-F79B-49A4-8DDF-48EDEF221BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF9A87C1-F79B-49A4-8DDF-48EDEF221BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF9A87C1-F79B-49A4-8DDF-48EDEF221BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF9A87C1-F79B-49A4-8DDF-48EDEF221BC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CDFD2EF9-9F04-41F2-B91C-26196FCBD677}
+		SolutionGuid = {AF5F9BEC-B9B9-4F67-85A9-7891BC307AD3}
 	EndGlobalSection
 EndGlobal

@@ -13,16 +13,10 @@ namespace Health_Application.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
+        public ActionResult Map()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Plan your run.";
 
             return View();
         }

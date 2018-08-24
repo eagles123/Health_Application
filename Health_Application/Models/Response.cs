@@ -15,6 +15,8 @@ namespace Health_Application.Models
         [Required]
         public ApplicationUser User { get; set; }
 
+        public DateTime Time { get; set; }
+
         public String Message { get; set; }
     }
 }

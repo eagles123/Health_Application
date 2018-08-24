@@ -13,18 +13,19 @@ namespace Health_Application.Models
 
         public ApplicationUser User { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        public int ProteinIntake { get; set; }
+        public float ProteinIntake { get; set; }
 
-        public int CarbonIntake { get; set; }
+        public float CarbonIntake { get; set; }
 
-        public int FatIntake { get; set; }
+        public float FatIntake { get; set; }
 
-        public int CalorieIntake { get; set; }
+        public float CalorieIntake { get; set; }
 
-        public int CalorieComsumption { get; set; }
+        public float CalorieComsumption { get; set; }
 
-        public short Distance { get; set; }
+        public float Distance { get; set; }
     }
 }

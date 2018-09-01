@@ -1,70 +1,215 @@
 ﻿
 @{
-    
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js></script>
-
 <div class="container-fluid">
-    <div class="row">
-        @*<div class="col-md-4 offset-1">
-            <div class="ct-chart ct-golden-section" id="chart1"></div>
-        </div>*@
+    <div class="row" style="padding-top:50px;">
         <div class="col-md-4 offset-1">
-                <canvas id="pieChart"></canvas>
-                <p></p>
-            </div>
+            <h4>Your Calorie Chart:</h4>
         </div>
+        <div class="col-md-4 offset-2">
+            <h4>Your Diet Pattern:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" style="padding-left:30px;">
+            <canvas id="barChart" width="1100" height="600"></canvas>
+        </div>
+        <div class="col-md-4 offset-1">
+            <canvas id="pieChart" width="600" height="400"></canvas>
+        </div>
+    </div>
+    <div class="row" style="padding-top:20px;">
+
+        <button id="10day" class="btn btn-success col-md-1 offset-3">10 days</button>
+        <button id="20day" class="btn btn-success col-md-1 offset-1">20 days</button>
+        <button id="30day" class="btn btn-success col-md-1 offset-1">30 days</button>
+
+
+
     </div>
 </div>
 
+
+
 <script>
-    //var data = {
-    //    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    //    series: [
-    //        [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-    //        [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
-    //    ]
-    //};
 
-    //var options = {
-    //    seriesBarDistance: 10
-    //};
+    $(document).ready(function () {
+        var calIn = @Html.Raw(Json.Encode(ViewBag.CalIn));
+        var calOut = @Html.Raw(Json.Encode(ViewBag.CalOut));
+        var date = @Html.Raw(Json.Encode(ViewBag.Dates));
+        var distance = @Html.Raw(Json.Encode(ViewBag.Distance));
+        var protein = @ViewBag.protein;
+        var carbon = @ViewBag.carbon;
+        var fat = @ViewBag.fat;
 
-    //var responsiveOptions = [
-    //    ['screen and (max-width: 640px)', {
-    //        seriesBarDistance: 5,
-    //        axisX: {
-    //            labelInterpolationFnc: function (value) {
-    //                return value[0];
-    //            }
-    //        }
-    //    }]
-    //];
-    
-    //new Chartist.Bar('#chart2', data, options, responsiveOptions);
-    var ctx = document.getElementById("pieChart");
+    $('#30day').click(function () {
+        $.ajax({
+            url: "/Data/Update",
+            type: "post",
+            cache: false,
+            data: { 'day': -30 },
+            success: function (result) {
+                
+                updateData(result);
+            }
+        });
+        });
+
+        $('#20day').click(function () {
+            $.ajax({
+                url: "/Data/Update",
+                type: "post",
+                cache: false,
+                data: { 'day': -20 },
+                success: function (result) {
+
+                    updateData(result);
+                }
+            });
+        });
+
+        $('#10day').click(function () {
+            $.ajax({
+                url: "/Data/Update",
+                type: "post",
+                cache: false,
+                data: { 'day': -10 },
+                success: function (result) {
+                    
+                    updateData(result);
+                }
+            });
+        });
+
+    var ctx = document.getElementById("barChart");
     data = {
         datasets: [{
-            data: [@ViewBag.protein, @ViewBag.carbon, @ViewBag.fat]
+                label: 'Calorie Take',
+                backgroundColor: 'rgb(255, 99, 132)',
+                data: calIn,
+                borderWidth: 1,
+                yAxisID: 'A'
+        }, {
+                label: 'Calorie Burn',
+                backgroundColor: 'rgb(54, 162, 235)',
+                data: calOut,
+                borderWidth: 1,
+                yAxisID: 'A'
+         }, {
+                label: "Kilometer",
+                borderColor: "lightgreen",
+                fill: false,
+                data: distance,
+                yAxisID: 'B',
+                type:'line'
+            }
+        ],
+        labels: date
+    };
+
+        function updateData(data) {
+            var newCalOut = [];
+            var newCalIn = [];
+            var newDate = [];
+            var newDistance = [];
+            var proteinArray = [];
+            var proteinArray = [];
+            var carbonArray = [];
+            var fatArray = [];
+            for (i = 0; i < data.length; i++) {
+                newCalOut.push(data[i].CalorieComsumption);
+                newCalIn.push(data[i].CalorieIntake);
+                var date = data[i].Date;
+                var dt = new Date(parseInt(date.replace(/(^.*\()|([+-].*$)/g, '')));
+                var dateTimeFormat = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+                newDate.push(dateTimeFormat);
+                newDistance.push(data[i].Distance);
+                proteinArray.push(data[i].ProteinIntake);
+                carbonArray.push(data[i].CarbonIntake);
+                fatArray.push(data[i].FatIntake);
+            }
+            var proteinSum = proteinArray.reduce((a, b) => a + b, 0);
+            var carbonSum = carbonArray.reduce((a, b) => a + b, 0);
+            var fatSum = fatArray.reduce((a, b) => a + b, 0);
+            var proteinp = proteinSum / (proteinSum + carbonSum + fatSum) * 100
+            var carbonp = carbonSum / (proteinSum + carbonSum + fatSum) * 100
+            var fatp = fatSum / (proteinSum + carbonSum + fatSum) * 100
+            console.log(myBarChart.data.datasets[0].data)
+            myBarChart.data.datasets[0].data = newCalIn;
+            myBarChart.data.datasets[1].data = newCalOut;
+            myBarChart.data.datasets[2].data = newDistance;
+            myBarChart.data.labels = newDate;
+            myBarChart.update();
+            myPieChart.data.datasets[0].data = [proteinp, carbonp, fatp];
+            myPieChart.update();
+        }
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+         options: {
+             scales: {
+                 xAxes: [{
+                     scaleLabel: {
+                         display: true,
+                         fontColor: 'black',
+                         fontSize: 20,
+                         labelString: 'Dates'
+                     }
+                 }],
+                yAxes: [{
+                    id: 'A',
+                    type: 'linear',
+                    position: 'left',
+                    scaleLabel: {
+                        display: true,
+                        fontColor: 'black',
+                        fontSize: 20,
+                        labelString: 'Calorie(kcal)'
+                    }
+
+                }, {
+                    id: 'B',
+                    type: 'linear',
+                        position: 'right',
+                        scaleLabel: {
+                            display: true,
+                            fontColor: 'black',
+                            fontSize: 20,
+                            labelString: 'Kilometer(km)'
+                        },
+                    ticks: {
+                        max: 10,
+                        min: 0
+                    }
+                }]
+            }
+        }
+    });
+
+
+        var ctx2 = document.getElementById("pieChart");
+    data2 = {
+        datasets: [{
+            data: [protein, carbon, fat],
+            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
         }],
 
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
             'Protein',
             'Carbonhydrate',
-            'Fate'
+            'Fat'
         ]
     };
 
-    var myPieChart = new Chart(ctx, {
+    var myPieChart = new Chart(ctx2, {
         type: 'pie',
-        data: data,
-        backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)']
+        data: data2
 
     });
-
+    });
 </script>
 

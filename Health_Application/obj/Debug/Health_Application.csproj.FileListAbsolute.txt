@@ -270,3 +270,4 @@ C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.dll
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.pdb
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.csprojAssemblyReference.cache
+C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.SeedData.resources

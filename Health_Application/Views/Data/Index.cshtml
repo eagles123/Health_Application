@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/bootbox.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>*@
 
 <style>
     #note {
@@ -21,96 +21,98 @@
 </style>
 
 <!--style="background-image: url(/img/bg3.jpg); background-repeat:no-repeat; background-size: 100%; height:100%"-->
-<div class="container-fluid">
-    <div class="row">
-        <div id="left" class="col-md-12">
-            @using (Html.BeginForm("LogData", "Data", FormMethod.Post, new { id = "DataForm", @class = "navbar-right" }))
-            {
-                @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    <h3>Calculate and record your Calorie</h3>
-                    <br />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-row">
-                        <div class="form-group col-md-5">
-                            <label for="ProteinIntake">Protein Consumption:</label>
+    <div class="container-fluid" style="background-image: url(/img/bgx.png); background-repeat:no-repeat; background-size: 100%; height:100%">
+        <div class="row">
+            <div id="left" class="col-md-12">
+                @using (Html.BeginForm("LogData", "Data", FormMethod.Post, new { id = "DataForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                            @Html.TextBoxFor(model => model.ProteinIntake, new { htmlAttributes = new { @class = "form-control" } })<span> (g)</span>
-                            <br />
-                            @Html.ValidationMessageFor(model => model.ProteinIntake, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        <h3>Calculate and record your Calorie</h3>
+                        <br />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="ProteinIntake">Protein Consumption:</label>
 
+                                @Html.TextBoxFor(model => model.ProteinIntake, new { htmlAttributes = new { @class = "form-control" } })<span> (g)</span>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.ProteinIntake, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group col-md-5">
+                                <label for="CarbonIntake">CarbonHydrate Consumption:</label>
+
+                                @Html.TextBoxFor(model => model.CarbonIntake, new { htmlAttributes = new { @class = "form-control" } })<span> (g)</span>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CarbonIntake, "", new { @class = "text-danger" })
+
+                            </div>
                         </div>
+                        <br />
+                        <br />
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="FatIntake">Fat Consumption: &thinsp; &emsp;</label>
 
-                        <div class="form-group col-md-5">
-                            <label for="CarbonIntake">CarbonHydrate Consumption:</label>
+                                @Html.TextBoxFor(model => model.FatIntake, new { htmlAttributes = new { @class = "form-control" } })<span> (g)</span>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.FatIntake, "", new { @class = "text-danger" })
 
-                            @Html.TextBoxFor(model => model.CarbonIntake, new { htmlAttributes = new { @class = "form-control" } })<span> (g)</span>
-                            <br />
-                            @Html.ValidationMessageFor(model => model.CarbonIntake, "", new { @class = "text-danger" })
+                            </div>
 
+                            <div class="form-group col-md-5">
+                                <label for="CalorieIntake">Total Calorie Cacluated: &emsp; &emsp;</label>
+                                @Html.TextBoxFor(model => model.CalorieIntake, new { htmlAttributes = new { @class = "form-control" } })<span> kcal</span>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CalorieIntake, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="col-md-2 col-md-offset-2">
+                                <button id="btn1" type="button" class="btn btn-danger">Calculate Calorie</button>
+                            </div>
                         </div>
-                    </div>
-                    <br />
-                    <br />
-                    <div class="form-row">
-                        <div class="form-group col-md-5">
-                            <label for="FatIntake">Fat Consumption: &thinsp; &emsp;</label>
+                        <br />
+                        <br />
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="ProteinIntake">Distance Run: &emsp; &thinsp; &emsp;</label>
 
-                            @Html.TextBoxFor(model => model.FatIntake, new { htmlAttributes = new { @class = "form-control" } })<span> (g)</span>
-                            <br />
-                            @Html.ValidationMessageFor(model => model.FatIntake, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control" } })<span> km</span>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
 
+                            </div>
+
+                            <div class="form-group col-md-5">
+                                <label for="ProteinIntake">Calorie Burn: &thinsp; &emsp; &emsp;</label>
+
+                                @Html.TextBoxFor(model => model.CalorieComsumption, new { htmlAttributes = new { @class = "form-control" } })<span> kcal</span>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CalorieComsumption, "", new { @class = "text-danger" })
+
+                            </div>
                         </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="CalorieIntake">Total Calorie Cacluated: &emsp; &emsp;</label>
-                            @Html.TextBoxFor(model => model.CalorieIntake, new { htmlAttributes = new { @class = "form-control" } })<span> kcal</span>
-                            <br />
-                            @Html.ValidationMessageFor(model => model.CalorieIntake, "", new { @class = "text-danger" })
-
-                        </div>
-                        <div class="col-md-2 col-md-offset-2">
-                            <button id="btn1" type="button" class="btn btn-danger">Calculate Calorie</button>
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <div class="form-row">
-                        <div class="form-group col-md-5">
-                            <label for="ProteinIntake">Distance Run: &emsp; &thinsp; &emsp;</label>
-
-                            @Html.TextBoxFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control" } })<span> km</span>
-                            <br />
-                            @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
-
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="ProteinIntake">Calorie Burn: &thinsp; &emsp; &emsp;</label>
-
-                            @Html.TextBoxFor(model => model.CalorieComsumption, new { htmlAttributes = new { @class = "form-control" } })<span> kcal</span>
-                            <br />
-                            @Html.ValidationMessageFor(model => model.CalorieComsumption, "", new { @class = "text-danger" })
-
-                        </div>
-                    </div>
                         <div class="col-md-2 offset-md-7">
                             <input id="btn2" type="submit" value="Commit today's data" class="btn btn-outline-primary" />
                             <br />
                         </div>
                         <label class="col-md-8 offset-md-6" id="note">* If you commit more than one time in one day, latter commit will overwirte the previous one.</label>
-                </div>
-            }
-        </div>
-        @*<div class="col-sm-8" style="background-color: pink; float:right; padding:100px;">
-                <div class="container">
-                    <p>hhehehrh</p>
+                    </div>
+                }
+            </div>
+            @*<div class="col-sm-8" style="background-color: pink; float:right; padding:100px;">
+                    <div class="container">
+                        <p>hhehehrh</p>
 
-                </div>
-            </div>*@
+                    </div>
+                </div>*@
+        </div>
     </div>
-</div>
+
 
 <script>
     $(document).ready(function () {
@@ -133,12 +135,12 @@
                 }
             });
         });
-        $(function () {
-            $('#Date').datepicker({
-                dateFormat: 'dd/mm/yyyy',
-                todayHighlight: true
-            });
-        });
+        //$(function () {
+        //    $('#Date').datepicker({
+        //        dateFormat: 'dd/mm/yyyy',
+        //        todayHighlight: true
+        //    });
+        //});
     
     });
 

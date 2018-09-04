@@ -12,12 +12,19 @@ namespace Health_Application.Controllers
 {
     public class PostsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        protected ApplicationDbContext db { get; set; }
+
+        public PostsController()
+        {
+            db = DbContextFactory.GetCurrentDbContext();
+
+        }
 
         // GET: Posts
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            var posts = db.Post.Include(p => p.User).ToList();
+            return View(posts);
         }
 
         // GET: Posts/Details/5
@@ -27,7 +34,7 @@ namespace Health_Application.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.Post.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -50,7 +57,7 @@ namespace Health_Application.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Posts.Add(post);
+                db.Post.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +72,7 @@ namespace Health_Application.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.Post.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -96,7 +103,7 @@ namespace Health_Application.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.Post.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -109,8 +116,8 @@ namespace Health_Application.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Post post = db.Posts.Find(id);
-            db.Posts.Remove(post);
+            Post post = db.Post.Find(id);
+            db.Post.Remove(post);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

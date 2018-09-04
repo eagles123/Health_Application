@@ -1,51 +1,63 @@
 ﻿@model IEnumerable<Health_Application.Models.Post>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Forum";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-<h2>Index</h2>
+    <h2>Forum</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
+    <p>
+        @Html.ActionLink("New Post", "Create",null, new {@class= "btn btn-primary btn-md" })
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <label>Title</label>
+                </th>
+                <th>
+                    <label>User</label>
+                </th>
+                <th>
+                    <label>Time</label>
+                </th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
 
-        @foreach (var item in Model)
-        {
+            @foreach (var item in Model)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Read", "Details", new { id = item.Id}, new { @class = "btn btn-success btn-sm"})
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
-    </div>
+            }
+        </tbody>
+    </table>
+</div>
 @section Scripts {
-    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
-    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
     <script>
-$( document ).ready( function () {
-$( '.table' ).DataTable();
-});
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
     </script>
 }
-<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />

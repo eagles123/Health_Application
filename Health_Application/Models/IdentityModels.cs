@@ -25,7 +25,7 @@ namespace Health_Application.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         //public DbSet<MyUserInfo> UserInfos { get; set; }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Post> Post { get; set; }
         public DbSet<UserData> UserDatas { get; set; }
         public DbSet<Response> Responses { get; set; }
 

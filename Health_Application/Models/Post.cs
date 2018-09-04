@@ -17,6 +17,7 @@ namespace Health_Application.Models
 
         public DateTime Time { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public String Body { get; set; }
 
         public IList<Response> Response { get; set; }

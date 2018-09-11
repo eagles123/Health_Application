@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Health_Application.Controllers
 {
-    
+    [Authorize]
     public class DataController : Controller
     {
         protected ApplicationDbContext db { get; set; }

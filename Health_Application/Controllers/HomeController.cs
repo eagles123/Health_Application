@@ -13,7 +13,7 @@ namespace Health_Application.Controllers
             return View();
         }
 
-
+        [Authorize]
         public ActionResult Map()
         {
             ViewBag.Message = "Plan your run.";

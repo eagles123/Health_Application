@@ -4,8 +4,13 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    textarea {
+        height: 450px
+    }
+</style>
 <div class="container">
-    <h2>Details</h2>
+    <hr />
 
     <div>
         <h4>Post</h4>
@@ -28,9 +33,32 @@
             </dd>
 
         </dl>
+
+
     </div>
-    <p>
+    @if (Request.IsAuthenticated)
+    {
+       
+            @Html.TextArea("myTextArea", "", new { @class = "form-control col-md-5 offset-6" })
+            <br/>
+            <button type="button" class="btn btn-info btn-sm col-md-1 offset-10" id="reply">Reply</button>
+        
+    }
+</div>
+    @*<p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
-    </p>
+    </p>*@
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#reply').click(function (e) {
+            e.preventDefault();
+            $(this).parents().next('dd').toggle();
+                
+            });
+    });
+</script>
+
+

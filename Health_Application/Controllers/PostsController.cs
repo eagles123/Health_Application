@@ -42,7 +42,13 @@ namespace Health_Application.Controllers
             return View(post);
         }
 
+        public ActionResult Reply()
+        {
+
+        }
+
         // GET: Posts/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();

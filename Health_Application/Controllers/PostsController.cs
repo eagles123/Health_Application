@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Health_Application.Models;
+using Health_Application.PostsViewModel;
+using Microsoft.AspNet.Identity;
 
 namespace Health_Application.Controllers
 {
@@ -23,7 +25,7 @@ namespace Health_Application.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            var posts = db.Post.Include(p => p.User).ToList();
+            var posts = db.Post.Include(p => p.User).Include(p=>p.Response).ToList();
             return View(posts);
         }
 
@@ -39,13 +41,38 @@ namespace Health_Application.Controllers
             {
                 return HttpNotFound();
             }
+            TempData["id"] = id;
             return View(post);
         }
 
-        public ActionResult Reply()
+        [HttpPost]
+        public ActionResult Reply(PostViewModel model)
         {
+            var id = User.Identity.GetUserId();
+            var user = db.Users.Single(c => c.Id == id);
+            DateTime now = DateTime.Now;
+            var postid = (int)TempData["id"];
 
+            //Response response = new Response();
+            //response = model.Response;
+            //response.User = user;
+            //response.Time = now;
+            //temp.Response.Add(response);
+            Response newResponse = new Response
+            {
+                Id = 1,
+                PostId = postid,
+                User = user,
+                Time = DateTime.Now,
+                Message = model.PostResponse.Message
+            };
+            Post post = db.Post.Find(postid);
+            post.Response.Add(newResponse);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
+
 
         // GET: Posts/Create
         [Authorize]

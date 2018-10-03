@@ -20,6 +20,6 @@ namespace Health_Application.Models
         [DataType(DataType.MultilineText)]
         public String Body { get; set; }
 
-        public IList<Response> Response { get; set; }
+        public ICollection<Response> Response { get; set; }
     }
 }

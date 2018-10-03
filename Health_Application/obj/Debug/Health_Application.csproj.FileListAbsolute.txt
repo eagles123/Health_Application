@@ -257,6 +257,7 @@ C:\Users\shi\source\repos\Health_Application\Health_Application\bin\Microsoft.AI
 C:\Users\shi\source\repos\Health_Application\Health_Application\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\shi\source\repos\Health_Application\Health_Application\bin\Microsoft.AI.Web.xml
 C:\Users\shi\source\repos\Health_Application\Health_Application\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.csprojAssemblyReference.cache
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.InitialModel.resources
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.minormigration.resources
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.ModifyDateproperty.resources
@@ -264,10 +265,9 @@ C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.RecoverUserForUserData.resources
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.FloateDataUser.resources
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.SeedUserData.resources
+C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.SeedData.resources
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.csproj.GenerateResource.cache
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.csproj.CoreCompileInputs.cache
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.csproj.CopyComplete
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.dll
 C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.pdb
-C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.csprojAssemblyReference.cache
-C:\Users\shi\source\repos\Health_Application\Health_Application\obj\Debug\Health_Application.Migrations.SeedData.resources

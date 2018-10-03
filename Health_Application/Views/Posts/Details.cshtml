@@ -1,4 +1,4 @@
-﻿@model Health_Application.Models.Post
+﻿@model Health_Application.PostsViewModel.PostViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -17,35 +17,54 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Post.Title)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Title)
+                @Html.DisplayFor(model => model.Post.Title)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Body)
+                @Html.DisplayNameFor(model => model.Post.Body)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Body)
+                @Html.DisplayFor(model => model.Post.Body)
             </dd>
 
         </dl>
 
-
     </div>
+
+    @if (Model.Post.Response.Count() > 0)
+    {
+        foreach (var item in Model.Post.Response)
+        {
+            <dl>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </dd>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </dd>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </dd>
+            </dl>
+        }
+    }
     @if (Request.IsAuthenticated)
     {
-       
-            @Html.TextArea("myTextArea", "", new { @class = "form-control col-md-5 offset-6" })
-            <br/>
-            <button type="button" class="btn btn-info btn-sm col-md-1 offset-10" id="reply">Reply</button>
-        
+        using (Html.BeginForm("Reply", "Posts", FormMethod.Post, new { id = "DataForm", @class = "navbar-right" }))
+        {
+            @Html.TextAreaFor(m => m.Response.Message, new { @class = "form-control col-md-5 offset-6", required = "required" })
+            <br />
+            @Html.HiddenFor(m => m.Response.Id)
+            <input id="btn2" type="submit" value="Reply" class="btn btn-info btn-sm col-md-1 offset-10" />
+        }
     }
 </div>
-    @*<p>
+@*<p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>*@
@@ -56,8 +75,8 @@
         $('#reply').click(function (e) {
             e.preventDefault();
             $(this).parents().next('dd').toggle();
-                
-            });
+
+        });
     });
 </script>
 

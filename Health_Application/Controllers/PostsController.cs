@@ -26,6 +26,9 @@ namespace Health_Application.Controllers
         public ActionResult Index()
         {
             var posts = db.Post.Include(p => p.User).Include(p=>p.Response).ToList();
+            var uid = User.Identity.GetUserId();
+            //var user = db.Users.Single(c => c.Id == id);
+            ViewData["userId"] = uid;
             return View(posts);
         }
 
@@ -36,13 +39,19 @@ namespace Health_Application.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Post.Find(id);
+            Post ps = db.Post.Find(id);
+            //eager load all objects
+            Post post = db.Post.Include(p => p.Response.Select(u=>u.User)).Include(p => p.User).FirstOrDefault(p => p.Id == id);
+            TempData["tempPost"] = post;
+            TempData["id"] = id;
             if (post == null)
             {
                 return HttpNotFound();
-            }
-            TempData["id"] = id;
-            return View(post);
+            };
+            PostViewModel postViewModel = new PostViewModel();
+            postViewModel.Post = post;
+            return View(postViewModel);
+
         }
 
         [HttpPost]
@@ -52,7 +61,11 @@ namespace Health_Application.Controllers
             var user = db.Users.Single(c => c.Id == id);
             DateTime now = DateTime.Now;
             var postid = (int)TempData["id"];
-
+            var post = db.Post.Find(postid);
+            if (post.Response == null)
+            {
+                post.Response = new List<Response>();
+            }
             //Response response = new Response();
             //response = model.Response;
             //response.User = user;
@@ -62,11 +75,12 @@ namespace Health_Application.Controllers
             {
                 Id = 1,
                 PostId = postid,
+                Post = post,
                 User = user,
                 Time = DateTime.Now,
                 Message = model.PostResponse.Message
             };
-            Post post = db.Post.Find(postid);
+
             post.Response.Add(newResponse);
             db.SaveChanges();
 
@@ -88,6 +102,11 @@ namespace Health_Application.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Body")] Post post)
         {
+            var id = User.Identity.GetUserId();
+            var user = db.Users.Single(c => c.Id == id);
+            post.User = user;
+            post.Time = DateTime.Now;
+            post.Response = new List<Response>();
             if (ModelState.IsValid)
             {
                 db.Post.Add(post);

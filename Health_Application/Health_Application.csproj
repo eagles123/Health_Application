@@ -315,6 +315,10 @@
     <Compile Include="Migrations\201808241432554_SeedData.Designer.cs">
       <DependentUpon>201808241432554_SeedData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810030853083_changeResponse.cs" />
+    <Compile Include="Migrations\201810030853083_changeResponse.Designer.cs">
+      <DependentUpon>201810030853083_changeResponse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DbContextFactory.cs" />
@@ -729,6 +733,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808241432554_SeedData.resx">
       <DependentUpon>201808241432554_SeedData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810030853083_changeResponse.resx">
+      <DependentUpon>201810030853083_changeResponse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
